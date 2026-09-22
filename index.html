@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACCT 2301 Concept Checks</title>
+<meta name="description" content="Interactive concept checks for each chapter of ACCT 2301 Financial Accounting.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📒</text></svg>">
+<style>
+  /* Palette and type pulled from the chapter games */
+  :root {
+    --violet: #262D68;
+    --violet-deep: #1a2158;
+    --orange: #FF9F1C;
+    --yellow: #D7DF23;
+    --blue: #1a5fa8;
+    --green: #0A713A;
+    --red: #E51F36;
+    --bg: #f4f5fb;
+    --ink: #1a1a2e;
+    --muted: #4a4f6a;
+    --rule: #DDE3F0;
+    --row-hover: #EAF3FF;
+    --white: #fff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .skip {
+    position: absolute; left: -9999px; top: 0; z-index: 10;
+    background: var(--orange); color: var(--violet);
+    font-weight: 700; padding: 12px 20px;
+    border-radius: 0 0 8px 0; text-decoration: none;
+  }
+  .skip:focus { left: 0; outline: 3px solid var(--white); outline-offset: 2px; }
+
+  .hdr {
+    background: linear-gradient(180deg, var(--violet-deep) 0%, var(--violet) 100%);
+    border-bottom: 4px solid var(--orange);
+    color: var(--white);
+    padding: 2.75rem 1.25rem 2.25rem;
+  }
+  .hdr-inner { max-width: 49.5rem; margin: 0 auto; padding-left: 4.75rem; }
+  h1 {
+    font-family: "Arial Black", "Arial Narrow Bold", Arial, sans-serif;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    line-height: 1.08;
+    margin: 0 0 .6rem;
+    color: var(--white);
+  }
+  .course { font-size: 1.15rem; color: var(--orange); margin: 0 0 1rem; font-weight: 700; }
+  .intro { max-width: 36rem; margin: 0; color: #E6E8F5; }
+
+  .sheet { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+  .ledger {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(38,45,104,0.13);
+    overflow: hidden;
+    position: relative;
+  }
+  .ledger::before {
+    content: "";
+    position: absolute; top: 0; bottom: 0; left: 0;
+    width: 3.5rem;
+    background: var(--violet);
+    pointer-events: none;
+  }
+  .ledger li + li { border-top: 1px solid var(--rule); }
+  .ledger li + li .num { box-shadow: 0 -1px 0 rgba(255,255,255,.12); }
+  .ledger a {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    align-items: center;
+    column-gap: 1.25rem;
+    min-height: 3.5rem;
+    padding: 0 1.25rem 0 0;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+  }
+  .ledger a > span:nth-child(2) { padding: .8rem 0; }
+  .ledger a:hover { background: var(--row-hover); }
+  .ledger a:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: -3px;
+    background: var(--row-hover);
+  }
+  .num {
+    align-self: stretch;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Arial Black", "Arial Narrow Bold", Arial, sans-serif;
+    font-size: 1.3rem;
+    color: var(--orange);
+    position: relative; z-index: 1;
+  }
+  .ledger a:hover .num, .ledger a:focus-visible .num { color: var(--yellow); }
+  .name {
+    display: block;
+    font-family: "Arial Black", "Arial Narrow Bold", Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.25;
+    color: var(--violet);
+  }
+  .topic { display: block; color: var(--muted); font-size: .95rem; }
+  .go {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    color: var(--violet);
+    background: var(--orange);
+    padding: .35rem .9rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .ledger a:hover .go, .ledger a:focus-visible .go { background: var(--violet); color: var(--white); }
+
+  footer { margin-top: 1.5rem; color: var(--muted); font-size: .9rem; text-align: center; }
+
+  @media (max-width: 34rem) {
+    .hdr-inner { padding-left: 0; }
+    .ledger::before { width: 2.75rem; }
+    .ledger a { grid-template-columns: 2.75rem 1fr; column-gap: .9rem; }
+    .num { font-size: 1.1rem; }
+    .go { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .ledger a, .go { transition: background-color .15s, color .15s; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#chapters">Skip to chapter list</a>
+<header class="hdr">
+  <div class="hdr-inner">
+    <h1>Chapter Concept Checks</h1>
+    <p class="course">ACCT 2301 Financial Accounting</p>
+    <p class="intro">Each chapter has one interactive check. Choose a chapter to open it. Work through the rounds, reflect before your score appears, and download your badge when you finish.</p>
+  </div>
+</header>
+<main class="sheet" id="main">
+
+  <nav aria-label="Concept checks by chapter">
+    <ol class="ledger" id="chapters">
+      <li><a href="ch1_account_sorter_v9_standalone.html">
+        <span class="num" aria-hidden="true">1</span>
+        <span><span class="name">The Account Sorter</span><span class="topic">Chapter 1: A framework for financial accounting</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch2_decoder_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">2</span>
+        <span><span class="name">The Decoder</span><span class="topic">Chapter 2: Recording transactions with debits and credits</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch3_timekeeper/index.html">
+        <span class="num" aria-hidden="true">3</span>
+        <span><span class="name">The Timekeeper</span><span class="topic">Chapter 3: Adjusting entries at the end of the period</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch4_risk_spotter_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">4</span>
+        <span><span class="name">The Risk Spotter</span><span class="topic">Chapter 4: Cash and internal controls</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch5_collector_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">5</span>
+        <span><span class="name">The Collector</span><span class="topic">Chapter 5: Receivables and sales</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch6_inventory_inspector_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">6</span>
+        <span><span class="name">The Inventory Inspector</span><span class="topic">Chapter 6: Inventory and cost of goods sold</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch7_misconception_buster_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">7</span>
+        <span><span class="name">The Misconception Buster</span><span class="topic">Chapter 7: Fixed assets and depreciation</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch8_liability_wrangler_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">8</span>
+        <span><span class="name">The Liability Wrangler</span><span class="topic">Chapter 8: Current liabilities</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch9_investors_lens_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">9</span>
+        <span><span class="name">The Investor&rsquo;s Lens</span><span class="topic">Chapter 9: Long-term liabilities and bonds</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch10_equity_enforcer_v_a11y_standalone.html">
+        <span class="num" aria-hidden="true">10</span>
+        <span><span class="name">The Equity Enforcer</span><span class="topic">Chapter 10: Stockholders&rsquo; equity</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+      <li><a href="ch11_cash_flow_detective_v8.html">
+        <span class="num" aria-hidden="true">11</span>
+        <span><span class="name">The Cash Flow Detective</span><span class="topic">Chapter 11: Statement of cash flows</span></span>
+        <span class="go" aria-hidden="true">Open</span></a></li>
+    </ol>
+  </nav>
+
+  <footer>
+    <p>Created by Jennifer Coon for ACCT 2301.</p>
+  </footer>
+</main>
+</body>
+</html>
